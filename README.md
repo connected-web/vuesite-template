@@ -17,7 +17,9 @@ A self hosted toolset for building interactive websites on top of Vuepress.
 ## Development Support
 
 - Hot-reloading provided by Vuepress
-- Linting and testing on PRs via Github Actions
+- Mocha test framework included
+- Linting included as part of tests
+- Testing on PRs via Github Actions
 
 ## How to get started
 

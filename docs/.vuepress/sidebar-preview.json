@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Site Root",
+    "children": [
+      "",
+      "01-first-page.md",
+      "02-second-page.md"
+    ]
+  },
+  {
+    "title": "sub-category",
+    "children": [
+      "/sub-category/",
+      "/sub-category/01-sub-category-page.md"
+    ]
+  }
+]
