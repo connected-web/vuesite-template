@@ -1,5 +1,5 @@
 const localStorageKey = 'vuesite-sharedStore-state'
-const { localStorage } = window
+const localStorage = require('./localStorage')
 
 const store = {
   debug: true,
@@ -18,7 +18,7 @@ const store = {
     try {
       const localState = JSON.parse(localStorage.getItem(localStorageKey))
       Object.assign(this.state, localState)
-      console.log('[jCard Store] Loaded values:', this.state)
+      console.log('[Shared Store] Loaded values:', this.state)
     } catch (ex) {
       // ignore error
     }
@@ -27,4 +27,4 @@ const store = {
 
 store.readFromLocalStorage()
 
-export default store
+module.exports = store
