@@ -1,39 +1,53 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs')
+const path = require('path')
+const md2json = require('@connected-web/md2json')
 
-function getSideBar(folder) {
-  const extension = [".md"];
-
-  const docsPath = path.join(`${__dirname}/../${folder}`)
-  const title = folder || 'Site Root' // TODO Read title from README in the docsPath
-  const files = fs.readdirSync(docsPath)
-
-  const children = files.filter((item) => {
-    const isReadme = item.toLowerCase() === "readme.md"
-    const isFile = fs.statSync(path.join(`${__dirname}/../${folder}`, item)).isFile()
-    const hasMatchingFileExt = extension.includes(path.extname(item))
-    return !isReadme && isFile && hasMatchingFileExt
-  }).map(item => `/${folder}/${item}`.replace('//', ''))
-
-  const folders = files.filter((item) => {
-    const isDirectory = fs.statSync(path.join(`${__dirname}/../${folder}`, item)).isDirectory()
-    const isHiddenDirectory = (item + '').charAt(0) === '.'
-    return isDirectory && !isHiddenDirectory
-  }).map(item => `/${item}/`)
-
-  return { title: title, children: [`/${folder}/`.replace('//', ''), ...children] };
+function readFile (filepath) {
+  try {
+    return fs.readFileSync(filepath, 'utf8')
+  } catch (ex) {
+    return false
+  }
 }
 
-function previewSidebarConfig(sidebar) {
+function getTitleFor (folder, folderpath) {
+  const readmePath = path.join(folderpath, 'README.md')
+  const readmeContents = readFile(readmePath)
+  const readmeTokens = md2json.tokens(readmeContents)
+  return readmeTokens[0]?.text || folder || 'Site Root'
+}
+
+function keepValidChildren(folder, item) {
+  const extension = ['.md']
+  const filepath = path.join(__dirname, '..', folder, item)
+  const isReadme = item.toLowerCase() === 'readme.md'
+  const isFile = fs.statSync(filepath).isFile()
+  const hasMatchingFileExt = extension.includes(path.extname(item))
+  return !isReadme && isFile && hasMatchingFileExt
+}
+
+async function getSideBar (folder) {
+  const folderPath = path.join(__dirname, '..', folder)
+  const title = getTitleFor(folder, folderPath)
+
+  const files = fs.readdirSync(folderPath)
+  const children = files
+    .filter(item => keepValidChildren(folder, item))
+    .map(item => `/${folder}/${item}`.replace('//', ''))
+
+  return { title: title, children: [`/${folder}/`.replace('//', ''), ...children] }
+}
+
+function previewSidebarConfig (sidebar) {
   const previewFilepath = path.join(__dirname, 'sidebar-preview.json')
   fs.writeFileSync(previewFilepath, JSON.stringify(sidebar, null, 2), 'utf8')
 }
 
-function generateSidebar() {
-  const docsPath = path.join(`${__dirname}/../`)
+async function generateSidebar () {
+  const docsPath = path.join(__dirname, '..')
   const files = fs.readdirSync(docsPath)
   const folders = files.filter((folder) => {
-    const filepath = path.join(`${__dirname}/../`, folder)
+    const filepath = path.join(__dirname, '..', folder)
     const isDirectory = fs.statSync(filepath).isDirectory()
     const isHiddenDirectory = folder.charAt(0) === '.'
     const readmepath = path.join(filepath, 'README.md')
@@ -46,10 +60,10 @@ function generateSidebar() {
     return isDirectory && hasReadme && !isHiddenDirectory
   })
 
-  const sidebar = [
+  const sidebar = await Promise.all([
     getSideBar(''),
     ...folders.map(folder => getSideBar(folder))
-  ]
+  ])
 
   previewSidebarConfig(sidebar)
 

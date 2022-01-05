@@ -1,15 +1,11 @@
 <template>
-  <label
-    :class="labelClass"
-    :title="title"
-  >{{ label }}</label>
+  <label :class="labelClass" :title="title">{{ label }}</label>
 </template>
 
 <script>
 const timeUntil = require('time-until')
 
 export default {
-  name: 'Expiry',
   props: {
     date: {
       type: Date,

@@ -1,19 +1,9 @@
 <template>
-  <div
-    v-if="error"
-    class="error-formatter"
-  >
-    <div
-      v-if="error"
-      class="error"
-    >
+  <div v-if="error" class="error-formatter">
+    <div v-if="error" class="error">
       <p><b>{{ error.message }}</b></p>
       <p v-if="error.message === 'Network Error'">
-        <span>Chances are that the local server isn't running!<br>
-          <span>1. Please make sure you have <a href="https://nodejs.org/en/">node LTS</a> installed...</span><br>
-          <span>2. Then run:</span><br>
-          <code>npx -y git+ssh:://git@github.marqeta.com/marqeta/rtc-diagnosis-tool.git#main</code>
-        </span>
+        <span>Please check your internet connection!</span>
       </p>
       <p v-else>
         <b>Advice:</b>

@@ -12,7 +12,6 @@
 
 <script>
 export default {
-  name: 'Messages',
   props: {
     messages: {
       type: Array,

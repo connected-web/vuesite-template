@@ -1,8 +1,5 @@
 <template>
-  <label
-    :class="labelClass"
-    :title="title"
-  >
+  <label :class="labelClass" :title="title">
     <slot />
     <span>{{ label }}</span>
   </label>

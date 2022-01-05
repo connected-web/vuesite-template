@@ -10,10 +10,9 @@
 
 <script>
 import Card from "./Card.vue"
-import RemoteDataSource from "../models/RemoteDataSource.vue"
+import RemoteDataSource from "../networking/RemoteDataSource.vue"
 
 export default {
-  name: 'EndpointCard',
   components: { Card, RemoteDataSource },
   props: {
     title: {
