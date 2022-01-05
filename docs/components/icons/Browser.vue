@@ -4,26 +4,14 @@
       <template #default="{ paginatedItems }">
         <div class="row">
           <div class="column">
-            <p
-              v-for="icon in paginatedItems.slice(0, 10)"
-              :key="icon.iconName"
-            >
-              <icon
-                :icon="icon.iconName"
-                class="double-size"
-              />
+            <p v-for="icon in paginatedItems.slice(0, 10)" :key="icon.iconName">
+              <icon :icon="icon.iconName" class="double-size" />
               <b>{{ icon.iconName }}</b>
             </p>
           </div>
           <div class="column">
-            <p
-              v-for="icon in paginatedItems.slice(10, 20)"
-              :key="icon.iconName"
-            >
-              <icon
-                :icon="icon.iconName"
-                class="double-size"
-              />
+            <p v-for="icon in paginatedItems.slice(10, 20)" :key="icon.iconName">
+              <icon :icon="icon.iconName" class="double-size" />
               <b>{{ icon.iconName }}</b>
             </p>
           </div>
@@ -34,9 +22,14 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import { fas } from '@fortawesome/free-solid-svg-icons'
+import Icon from './Icon.vue'
+
+Vue.component('Icon', Icon)
 
 export default {
+  components: { Icon },
   computed: {
     iconList() {
       return Object.values(fas)

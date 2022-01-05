@@ -14,7 +14,7 @@ library.add(fas)
 Vue.component('FontAwesomeIcon', FontAwesomeIcon)
 Vue.config.productionTip = false
 
-const Icon = {
+export default {
   props: {
     icon: {
       type: String,
@@ -22,10 +22,6 @@ const Icon = {
     }
   }
 }
-
-Vue.component('Icon', Icon)
-
-export default Icon
 </script>
 
 <style scoped>
@@ -34,6 +30,6 @@ export default Icon
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  vertical-align: middle;
+  vertical-align: text-top;
 }
 </style>

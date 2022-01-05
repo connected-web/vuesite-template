@@ -20,5 +20,11 @@
       "/02-second-section/",
       "/02-second-section/01-second-section-page.md"
     ]
+  },
+  {
+    "title": "Components",
+    "children": [
+      "/components/"
+    ]
   }
 ]
