@@ -7,7 +7,7 @@ const store = {
     message: 'Hello!'
   },
   setMessage (message) {
-    this.message = message
+    this.state.message = message
     this.updateLocalStorage()
   },
   updateLocalStorage () {
