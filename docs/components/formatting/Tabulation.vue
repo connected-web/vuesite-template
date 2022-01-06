@@ -137,9 +137,16 @@ export default {
       const clonedRows = removeArrayListeners(rows)
       if (col) {
         clonedRows.sort((a, b) => {
-          const sa = a[0][col] + ''
-          const sb = b[0][col] + ''
-          return asc ? sa.localeCompare(sb) : sb.localeCompare(sa)
+          const ca = a[0][col]
+          const cb = b[0][col]
+          if (typeof ca === 'number' && typeof cb === 'number') {
+            const result = ca - cb > 0 ? 1 : -1
+            return asc ? result * -1 : result
+          } else {
+            const sa = ca + ''
+            const sb = cb + ''
+            return asc ? sb.localeCompare(sa) : sa.localeCompare(sb + '')
+          }
         })
       }
       return clonedRows

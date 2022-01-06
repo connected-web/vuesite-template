@@ -28,7 +28,7 @@ div.card.boundary {
   font-family: "Nunito Sans", Helvetica, sans-serif;
   border: 2px solid #eee;
   border-radius: 0.5em;
-  padding: 0 1em 0 1em;
+  padding: 0.5em 1em 0.5em 1em;
   margin: 0 0 0.5em 0;
   background: #FEFEFE;
 }

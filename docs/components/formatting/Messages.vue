@@ -15,7 +15,9 @@ export default {
   props: {
     messages: {
       type: Array,
-      default: () => []
+      default() {
+        return []
+      }
     }
   }
 }

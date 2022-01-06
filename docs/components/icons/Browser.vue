@@ -22,11 +22,8 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { fas } from '@fortawesome/free-solid-svg-icons'
-import Icon from './Icon.vue'
-
-Vue.component('Icon', Icon)
+import Icon from '../Icon.vue'
 
 export default {
   components: { Icon },

@@ -23,10 +23,7 @@
         <pre>Please provide a template to render <b>paginatedItems</b></pre>
         <pre>{{ paginatedItems }}</pre>
       </slot>
-      <span
-        v-if="isPaginated(items)"
-        class="pagination-bottom"
-      >
+      <span v-if="isPaginated(items)" class="pagination-bottom">
         <span>End of page</span>
         <button @click="previousPage">&lt; Prev Page</button>
         <span>{{ pageNumber + 1 }} of {{ maxPages }}</span>
@@ -51,12 +48,15 @@ export default {
     showFilter: {
       type: Boolean,
       default: true
+    },
+    pageSize: {
+      type: Number,
+      default: 20
     }
   },
   data() {
     return {
       filter: '',
-      pageSize: 20,
       pageNumber: 0
     }
   },
@@ -82,7 +82,7 @@ export default {
           .filter(item => {
             return JSON.stringify(item).toLowerCase().includes(filterWord)
           })
-      } 
+      }
       return items || []
     },
     isPaginated(items) {

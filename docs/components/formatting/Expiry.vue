@@ -58,10 +58,14 @@ export default {
 
 <style scoped>
 label {
+  display: inline-block;
+  margin: 0.1em;
   padding: 0.2em 0.5em 0.4em 0.5em;
   border-radius: 0.4em;
   background: #EEE;
   font-size: 0.9em;
+  white-space: nowrap;
+  vertical-align: middle;
 }
 
 .unit-week.future,

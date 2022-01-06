@@ -1,5 +1,5 @@
 <template>
-  <pre v-if="response">{{ formatJson(response) }}</pre>
+  <pre v-if="response"><code>{{ formatJson(response) }}</code></pre>
 </template>
 
 <script>
@@ -20,3 +20,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+pre {
+  color: white;
+}
+</style>

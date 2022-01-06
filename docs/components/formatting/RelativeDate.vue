@@ -68,6 +68,7 @@ label {
   justify-content: flex-start;
   align-items: center;
   color: black;
+  white-space: nowrap;
 }
 label > * {
   margin: 0 0.2em;

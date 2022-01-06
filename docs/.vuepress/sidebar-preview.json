@@ -24,7 +24,9 @@
   {
     "title": "Components",
     "children": [
-      "/components/"
+      "/components/",
+      "/components/01-icon-browser.md",
+      "/components/02-formatting-components.md"
     ]
   }
 ]
