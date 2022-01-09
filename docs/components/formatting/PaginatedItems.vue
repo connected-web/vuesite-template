@@ -1,37 +1,53 @@
 <template>
   <div class="paginated-items">
-    <p v-if="showFilter">
-      <label>Filter contains:</label>
+    <div v-if="showFilter" class="filter-row">
+      <Icon icon="filter" />
       <input
         v-model="filter"
         type="text"
         @change="resetPageNumber()"
         @keydown="resetPageNumber()"
+        placeholder="Type to filter"
+        class="search-filter"
       >
-      <span>Found {{ filteredItems(items).length }} items</span>
-    </p>
+      <span class="hide-on-small-screen">Found {{ filteredItems(items).length }} {{ itemTypePlural }} {{ filter ? `containing "${filter}"` : '' }}</span>
+    </div>
     <div v-if="items && filteredItems(items).length > 0">
-      <p>
-        <span v-if="isPaginated(items)" class="pagination-top">
-          <span>Page size: {{ pageSize }} items shown</span>
-          <button @click="previousPage">&lt; Prev Page</button>
-          <span>{{ pageNumber + 1 }} of {{ maxPages }}</span>
-          <button @click="nextPage">Next Page &gt;</button>
+      <div v-if="isPaginated(items)" class="pagination-top">
+        <span class="pagination-size hide-on-small-screen">{{ pageSize }} {{ itemTypePlural }} / page; {{ paginatedItems.length }} in view of {{ items.length }}:</span>
+        <span class="buttons">
+          <button @click="previousPage">
+            <Icon icon="angle-left" />
+            <label class="right">Prev Page</label>
+          </button>
+          <span class="pagination-numbers">{{ pageNumber + 1 }} of {{ maxPages }}</span>
+          <button @click="nextPage">
+            <label class="left">Next Page</label>
+            <Icon icon="angle-right" />
+          </button>
         </span>
-      </p>
+      </div>
       <slot :paginatedItems="paginatedItems">
         <pre>Please provide a template to render <b>paginatedItems</b></pre>
         <pre>{{ paginatedItems }}</pre>
       </slot>
-      <span v-if="isPaginated(items)" class="pagination-bottom">
-        <span>End of page</span>
-        <button @click="previousPage">&lt; Prev Page</button>
-        <span>{{ pageNumber + 1 }} of {{ maxPages }}</span>
-        <button @click="nextPage">Next Page &gt;</button>
-      </span>
+      <div v-if="isPaginated(items)" class="pagination-bottom">
+        <span class="pagination-eop hide-on-small-screen">End of page</span>
+        <span class="buttons">
+          <button @click="previousPage">
+            <Icon icon="angle-left" />
+            <label class="right">Prev Page</label>
+          </button>
+          <span class="pagination-numbers">{{ pageNumber + 1 }} of {{ maxPages }}</span>
+          <button @click="nextPage">
+            <label class="left">Next Page</label>
+            <Icon icon="angle-right" />
+          </button>
+        </span>
+      </div>
     </div>
     <div v-else>
-      <p>No items found for filter ({{ filter }}).</p>
+      <p>No {{ itemTypePlural }} found containing "{{ filter }}".</p>
     </div>
   </div>
 </template>
@@ -52,6 +68,10 @@ export default {
     pageSize: {
       type: Number,
       default: 20
+    },
+    itemTypePlural: {
+      type:String,
+      default: 'items'
     }
   },
   data() {
@@ -105,22 +125,105 @@ export default {
     }
   }
 }
-
 </script>
 
 <style scoped>
 pre {
   color: white;
 }
+.paginated-items {
+  margin: 0.5em 0;
+}
+
+.filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.5em 0;
+}
+input.search-filter {
+  font-size: 0.9em;
+  margin: 0 0.5em;
+  padding: 0.3em;
+  flex: 1 20;
+}
+
 .pagination-top {
-  display: block;
+  display: flex;
   padding-bottom: 5px;
   border-bottom: 2px solid #eee;
+  align-items: center;
+  justify-content: space-between;
+}
+.pagination-top > .buttons {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: -0.5em;
 }
 
 .pagination-bottom {
-  display: block;
+  display: flex;
   padding-top: 5px;
   border-top: 2px solid #eee;
+  align-items: center;
+  justify-content: space-between;
+}
+.pagination-bottom > .buttons {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: -0.5em;
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  border: none;
+  margin: 0 0.5em;
+  padding: 0.5em 0.5em;
+  font-family: inherit;
+  font-weight: bold;
+  background: #ccc;
+  color: black;
+}
+button:hover {
+  background: #ddd;
+}
+button:active {
+  background: #aaa;
+}
+button > label.left {
+  margin-left: 0.5em;
+}
+button > label.right {
+  margin-right: 0.5em;
+}
+.pagination-numbers {
+  min-width: 50px;
+  text-align: center;
+}
+.pagination-size, .pagination-eop {
+  font-size: 1.0em;
+  color: #aaa;
+}
+@media (max-width: 719px) {
+  .hide-on-small-screen {
+    display: none;
+  }
+  .pagination-top, .pagination-bottom {
+    justify-content: space-evenly;
+    margin-left: -0.5em;
+  }
+  .pagination-top > .buttons, .pagination-bottom > .buttons {
+    flex: 1 10;
+  }
+  .pagination-numbers {
+    flex: 1 10;
+  }
+  input.search-filter {
+    margin: 0;
+  }
 }
 </style>

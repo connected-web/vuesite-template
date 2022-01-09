@@ -74,7 +74,8 @@ Format a list of items as a series of paragraphs.
 
 The paginated items formatter reduces the number of items to the page size, calculates the number of pages, and provides a filter to search for a specific item. It can be used to create a filterable, multi-page view of large datasets using a custom renderer.
 
-<formatting-PaginatedItems :items="['Apple', 'Orange', 'Banana', 'Grape', 'Pear', 'Mango', 'Tomato', 'Carrot', 'Peas']" :pageSize="5">
+<formatting-PaginatedItems :pageSize="5" itemTypePlural="things"
+    :items="['Apple', 'Orange', 'Banana', 'Grape', 'Pear', 'Mango', 'Tomato', 'Carrot', 'Peas']">
   <template v-slot="{ paginatedItems }">
     <ul>
       <li v-for="item in paginatedItems" :key="item">{{ item }}</li>

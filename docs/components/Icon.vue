@@ -26,11 +26,14 @@ export default {
 </script>
 
 <style scoped>
-.icon.wrapper {
+.icon {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  vertical-align: text-top;
+  width: 1.5em;
+  height: 1.5em;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
 }
 </style>
