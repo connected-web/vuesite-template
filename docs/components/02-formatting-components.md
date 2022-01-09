@@ -83,6 +83,17 @@ The paginated items formatter reduces the number of items to the page size, calc
   </template>
 </formatting-PaginatedItems>
 
+```html
+<formatting-PaginatedItems :pageSize="5" itemTypePlural="things"
+    :items="['Apple', 'Orange', 'Banana', 'Grape', 'Pear', 'Mango', 'Tomato', 'Carrot', 'Peas']">
+  <template v-slot="{ paginatedItems }">
+    <ul>
+      <li v-for="item in paginatedItems" :key="item">{{ item }}</li>
+    </ul>
+  </template>
+</formatting-PaginatedItems>
+```
+
 ## Relative Date
 
 Format a date as a colour coded time relative to the the current browser time.
