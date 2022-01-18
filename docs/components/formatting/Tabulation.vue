@@ -8,8 +8,8 @@
         <th
           v-for="(columnHeading, i) in columnHeadings"
           :key="`colHeading-${columnHeading}-${i}`"
+          v-on:click="sortByColumnEvent(columnHeading, i)"
           :class="columnHeadingClass(columnHeading, i)"
-          @click="sortByColumnEvent(columnHeading, i)"
         >
           <div>
             <label>{{ columnHeading }}</label>
@@ -32,7 +32,22 @@
             :column="column"
             :columnKey="columnKey(column)"
           >
-            {{ contentsOf(cell, column) }}
+            <div v-if="cellType(cell, column) === 'object'">
+              <div v-for="[entryKey, entryValue] in cellEntries(cell, column)" :key="entryKey" class="cell property">
+                <b>{{ entryKey }}</b>
+                <span>{{ entryValue }}</span>
+              </div>
+            </div>
+            <span v-else-if="cellType(cell, column) === 'icon'">
+              <icon :icon="contentsOf(cell, column)" />
+            </span>
+            <div v-else-if="cellType(cell, column) === 'color'" style="text-transform: uppercase; font-family: monospace;">
+              <span>{{ contentsOf(cell, column) }}</span>
+              <icon icon="square" :style="`color: ${contentsOf(cell, column)}`" />
+            </div>
+            <span v-else>
+              {{ contentsOf(cell, column) }}
+            </span>
           </slot>
         </td>
       </tr>
@@ -41,6 +56,8 @@
 </template>
 
 <script>
+import flattenObject from '../utils/flattenObject'
+
 function removeArrayListeners(data) {
   return JSON.parse(JSON.stringify(data))
 }
@@ -137,26 +154,35 @@ export default {
       const clonedRows = removeArrayListeners(rows)
       if (col) {
         clonedRows.sort((a, b) => {
-          const ca = a[0][col]
-          const cb = b[0][col]
-          if (typeof ca === 'number' && typeof cb === 'number') {
-            const result = ca - cb > 0 ? 1 : -1
-            return asc ? result * -1 : result
-          } else {
-            const sa = ca + ''
-            const sb = cb + ''
-            return asc ? sb.localeCompare(sa) : sa.localeCompare(sb + '')
-          }
+          const sa = JSON.stringify(a[0][col])
+          const sb = JSON.stringify(b[0][col])
+          return asc ? sa.localeCompare(sb) : sb.localeCompare(sa)
         })
       }
       return clonedRows
     }
   },
   methods: {
-    columnHeadingClass(columnHeading) {
+    cellEntries(cell, column) {
+      const value = this.contentsOf(cell, column)
+      const flattened = flattenObject(value)
+      return Object.entries(flattened)
+    },
+    cellType(cell, column) {
+      const value = this.contentsOf(cell, column)
+      const columnKey = this.columnKey(column)
+      if (columnKey === 'icon') {
+        return 'icon'
+      }
+      if (columnKey === 'color') {
+        return 'color'
+      }
+      return typeof value
+    },
+    columnHeadingClass(columnHeading, i) {
       return columnHeading === this.computedSortedColumn ? 'sorted' : 'unsorted'
     },
-    columnIcon(columnHeading) {
+    columnIcon(columnHeading, i) {
       const direction = this.computedSortAscending ? 'sort-amount-up' : 'sort-amount-down'
       return this.computedSortedColumn === columnHeading ? direction : 'sort'
     },
@@ -169,9 +195,12 @@ export default {
     },
     sortByColumnEvent(columnHeading) {
       const same = columnHeading === this.computedSortedColumn
-      this.sortedHeading = columnHeading
       this.internalSortedColumn = columnHeading
       this.internalSortAscending = same ? !this.internalSortAscending : true
+      const reset = same && this.internalSortAscending
+      if (reset) {
+        this.internalSortedColumn = ''
+      }
       this.$emit('sortByColumn', {
         columnHeading,
         sortAscending: same ? !this.computedSortAscending : true
@@ -183,7 +212,6 @@ export default {
 
 <style scoped>
 table.tabulation {
-  /* border: 2px solid #DDD; */
   margin: 1em 0;
   display: table;
   width: 100%;
@@ -215,6 +243,12 @@ td {
   outline: 2px solid #FFF;
   padding: 5px;
 }
-tr:nth-child(odd) { background: #FAFAFA }
-tr:nth-child(even) { background: #F0F0F0 }
+.cell.property {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.cell.property > b {
+  margin: 0 0.5em 0 0;
+}
 </style>
