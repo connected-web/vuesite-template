@@ -1,15 +1,12 @@
 <template>
-  <table
-    v-if="rows.length"
-    class="tabulation"
-  >
+  <table v-if="rows.length" class="tabulation">
     <thead>
       <tr>
         <th
           v-for="(columnHeading, i) in columnHeadings"
           :key="`colHeading-${columnHeading}-${i}`"
-          v-on:click="sortByColumnEvent(columnHeading, i)"
           :class="columnHeadingClass(columnHeading, i)"
+          @click="sortByColumnEvent(columnHeading, i)"
         >
           <div>
             <label>{{ columnHeading }}</label>
@@ -19,14 +16,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr
-        v-for="(rowItem, j) in sortedRows"
-        :key="`row-${j}`"
-      >
-        <td
-          v-for="(cell, column) in rowItem"
-          :key="`cell-${column}`"
-        >
+      <tr v-for="(rowItem, j) in sortedRows" :key="`row-${j}`">
+        <td v-for="(cell, column) in rowItem" :key="`cell-${column}`">
           <slot
             :cell="cell"
             :column="column"
@@ -179,10 +170,10 @@ export default {
       }
       return typeof value
     },
-    columnHeadingClass(columnHeading, i) {
+    columnHeadingClass(columnHeading) {
       return columnHeading === this.computedSortedColumn ? 'sorted' : 'unsorted'
     },
-    columnIcon(columnHeading, i) {
+    columnIcon(columnHeading) {
       const direction = this.computedSortAscending ? 'sort-amount-up' : 'sort-amount-down'
       return this.computedSortedColumn === columnHeading ? direction : 'sort'
     },
@@ -212,14 +203,11 @@ export default {
 
 <style scoped>
 table.tabulation {
-  margin: 1em 0;
   display: table;
   width: 100%;
 }
 th {
-  outline: 2px solid #FFF;
   background: #EEE;
-  padding: 5px;
   user-select: none;
 }
 th > div {
@@ -238,10 +226,6 @@ th:hover {
 }
 th.sorted > div > .icon.wrapper {
   color: #333;
-}
-td {
-  outline: 2px solid #FFF;
-  padding: 5px;
 }
 .cell.property {
   display: flex;

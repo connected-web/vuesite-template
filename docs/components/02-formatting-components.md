@@ -155,10 +155,18 @@ Take a list of of objects and display them as an interactive table.
 Can be customised with partial columns, and custom render logic on a per-cell basis.
 
 <formatting-Tabulation :items="[
-    { name: 'Apple', type: 'Fruit', qty: 30 },
-    { name: 'Banana', type: 'Fruit', qty: 12 },
-    { name: 'Potato', type: 'Vetagable', qty: 67 },
-    { name: 'Carrot', type: 'Vegetable', qty: 134 }]" />
+    { name: 'Apple', color: '#D20', icon: 'shopping-bag', qty: 30 },
+    { name: 'Banana', color: '#FC0', icon: 'shopping-basket', qty: 12 },
+    { name: 'Potato', color: '#', icon: 'shopping-basket', qty: 67 },
+    { name: 'Carrot', color: 'orange', icon: 'shopping-bag', qty: 134 }]" />
+
+```html
+<formatting-Tabulation :items="[
+    { name: 'Apple', icon: 'shopping-bag', qty: 30 },
+    { name: 'Banana', icon: 'shopping-basket', qty: 12 },
+    { name: 'Potato', icon: 'shopping-basket', qty: 67 },
+    { name: 'Carrot', icon: 'shopping-bag', qty: 134 }]" />
+```
 
 ## TODO component
 
