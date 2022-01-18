@@ -26,7 +26,8 @@
     "children": [
       "/components/",
       "/components/01-icon-browser.md",
-      "/components/02-formatting-components.md"
+      "/components/02-formatting-components.md",
+      "/components/03-networking-components.md"
     ]
   }
 ]
