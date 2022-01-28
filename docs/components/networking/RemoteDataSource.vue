@@ -165,7 +165,11 @@ export default {
         localResponse = axiosException.response
         self.error = {
           message,
-          config
+          config: {
+            url: config ? config.url : self.dataSourceUrl,
+            method: config ? config.method : 'GET',
+            headers: config ? config.headers : undefined
+          }
         }
         self.$emit('error', self.error)
       }
@@ -180,8 +184,8 @@ export default {
         statusText,
         headers,
         config: {
-          url: config ? config.url : undefined,
-          method: config ? config.method : undefined,
+          url: config ? config.url : self.dataSourceUrl,
+          method: config ? config.method : 'GET',
           headers: config ? config.headers : undefined
         },
         request
