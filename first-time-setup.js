@@ -57,7 +57,7 @@ async function setup () {
 
   report('Committing changes and pushing to remote')
   await run('git add .')
-  await run(`git commit -m "Setup new vuesite from template for ${org}/${repo})"`)
+  await run(`git commit -m Setup new vuesite from template for ${org}/${repo})`)
   await run('git push')
 
   report(`All done - ${org}/${repo} has been setup and is ready to go!`)
