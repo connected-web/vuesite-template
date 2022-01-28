@@ -11,7 +11,8 @@ async function generateVueConfig() {
     description: packageJson.description,
     themeConfig: {
       nav: [
-        { text: 'Home', link: '/' }
+        { text: 'Home', link: '/' },
+        { text: 'Github', link: packageJson.homepage }
       ],
       sidebar: await generateSidebar()
     },

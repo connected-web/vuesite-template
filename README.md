@@ -27,3 +27,4 @@ A self hosted toolset for building interactive websites on top of Vuepress.
 - Check out the code locally.
 - Run: `npm install`
 - Run: `node first-time-setup.js`
+- Go to [Github > Settings > Pages](https://github.com/connected-web/vuesite-template/settings/pages) and enable publishing from the `gh-pages` branch
