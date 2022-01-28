@@ -51,7 +51,7 @@ async function setup () {
   await run('npm install', currentPath)
 
   report('Generated updated screenshot')
-  await run(`node generate-screenshot.js`, currentPath)
+  await run('node generate-screenshot.js', currentPath)
 
   report('Removing setup script')
   await run(`rm ${fromHere('first-time-setup.js')}`, currentPath)

@@ -6,8 +6,8 @@ const packageJson = require('./package.json')
 const { clearInterval } = require('timers')
 async function report (...messages) { console.log(`[${packageJson.name} / ${__filename.split(path.sep).pop().split('.js').shift()}]`, ...messages) }
 
-function startServer() {
-  const serverStartCommand = `npm start`
+function startServer () {
+  const serverStartCommand = 'npm start'
   const spawnArgs = serverStartCommand.split(' ')
   const [first, ...rest] = spawnArgs
   const refProcess = spawn(first, rest)
@@ -19,17 +19,17 @@ function startServer() {
     exitCode: 'unknown',
     timeout: false
   }
-  
+
   refProcess.stdout.on('data', (data) => {
     processState.stdout.push(data + '')
     processState.messages.push(data + '')
   })
-  
+
   refProcess.stderr.on('data', (data) => {
     processState.stderr.push(data + '')
     processState.messages.push(data + '')
   })
-  
+
   refProcess.on('close', (code) => {
     processState.exitCode = code
     if (processState.timeout) {
@@ -40,7 +40,7 @@ function startServer() {
   return processState
 }
 
-async function takeScreenshot(url) {
+async function takeScreenshot (url) {
   const screenshotFile = 'screenshot.png'
   report('Taking screenshot!')
   const screenshotCommand = `npx capture-website ${url} --output ${screenshotFile} --width 800 --height 600 --delay 1 --overwrite`
@@ -56,7 +56,7 @@ async function takeScreenshot(url) {
 
 async function generateScreenshot () {
   report('Starting local screenshot server')
-  
+
   let triggerFound = false
   const processState = startServer()
   const processInfoCleardown = setInterval(() => {
@@ -65,7 +65,7 @@ async function generateScreenshot () {
       const line = stdout.shift()
       if (line.match('http://localhost') && !triggerFound) {
         triggerFound = true
-        const [,url] = line.match(/(http:\/\/localhost:[\d]+\/)/)
+        const [, url] = line.match(/(http:\/\/localhost:[\d]+\/)/)
         setTimeout(async () => {
           report('Matched URL in server start output:', url)
           await takeScreenshot(url)
