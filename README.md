@@ -37,7 +37,7 @@ If setup correctly (see below); you should be able to access this site on:
 
 ## Licenses
 
-See: [LICENSE.md](LICENCE.md)
+See: [LICENSE.md](./LICENSE.md)
 
 The hosted vuesite packages together:
 
