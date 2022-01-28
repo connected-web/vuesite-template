@@ -27,7 +27,6 @@
   },
   "homepage": "https://github.com/connected-web/vuesite-template#readme",
   "dependencies": {
-    "@connected-web/md2json": "^1.1.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/vue-fontawesome": "^2.0.6",
@@ -38,6 +37,7 @@
     "vuepress": "^1.8.2"
   },
   "devDependencies": {
+    "@connected-web/md2json": "^1.1.0",
     "capture-website-cli": "^2.2.0",
     "chai": "^4.3.4",
     "eslint": "^7.24.0",

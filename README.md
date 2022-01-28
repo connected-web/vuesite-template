@@ -34,3 +34,35 @@ If setup correctly (see below); you should be able to access this site on:
 - Run: `npm install`
 - Run: `node first-time-setup.js`
 - Go to [Github > Settings > Pages](https://github.com/connected-web/vuesite-template/settings/pages) and enable publishing from the `gh-pages` branch
+
+## Licenses
+
+See: [LICENSE.md](LICENCE.md)
+
+The hosted vuesite packages together:
+
+- @fortawesome/fontawesome-svg-core
+- @fortawesome/free-solid-svg-icons
+- @fortawesome/vue-fontawesome
+- @vuepress/plugin-register-components
+- @vuepress/theme-default
+- axios
+- time-until
+- vuepress
+
+Whilst the build tools require:
+
+- @connected-web/md2json
+- capture-website-cli
+- chai
+- eslint
+- eslint-plugin-html
+- eslint-plugin-mocha
+- eslint-plugin-vue
+- mocha
+- node-localstorage
+- promise-path
+- standard
+
+
+Which come with their own terms and conditions.
