@@ -25,6 +25,7 @@ A self hosted toolset for building interactive websites on top of Vuepress.
 
 ## How to get started
 
+- Make sure you have the latest version [Node LTS](https://nodejs.org/en/) installed
 - Copy [this template in GitHub](https://github.com/connected-web/vuesite-template/generate)
 - Check out the code locally
 - Run: `npm install`
