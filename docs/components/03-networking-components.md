@@ -61,7 +61,7 @@ Any custom template can be provided inside the `<template v-slot-"{ response }">
 
 <ClientOnly>
   <networking-RemoteDataSource
-    data-source-url="https://boardgames-api.calisaurus.net/api/status">
+    data-source-url="https://boardgames-api.calisaurus.net/api/boardgame/list">
   <template v-slot="{ response }">
     <formatting-Tabulation v-if="response.data" :items="response.data.games" />
   </template>
@@ -71,7 +71,7 @@ Any custom template can be provided inside the `<template v-slot-"{ response }">
 ```html
 <ClientOnly>
   <networking-RemoteDataSource
-    data-source-url="https://boardgames-api.calisaurus.net/api/status">
+    data-source-url="https://boardgames-api.calisaurus.net/api/boardgame/list">
   <template v-slot="{ response }">
     <formatting-Tabulation v-if="response.data" :items="response.data.games" />
   </template>
