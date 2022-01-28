@@ -5,10 +5,10 @@
       <input
         v-model="filter"
         type="text"
-        @change="resetPageNumber()"
-        @keydown="resetPageNumber()"
         placeholder="Type to filter"
         class="search-filter"
+        @change="resetPageNumber()"
+        @keydown="resetPageNumber()"
       >
       <span class="hide-on-small-screen">Found {{ filteredItems(items).length }} {{ itemTypePlural }} {{ filter ? `containing "${filter}"` : '' }}</span>
     </div>

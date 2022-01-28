@@ -47,7 +47,7 @@ async function setup () {
 
   report('Remove and generate package-lock.json')
   await run(`rm ${fromHere('package-lock.json')}`)
-  await run(`npm install`, currentPath)
+  await run('npm install', currentPath)
 
   report('Removing setup script')
   await run(`rm ${fromHere('first-time-setup.js')}`)
