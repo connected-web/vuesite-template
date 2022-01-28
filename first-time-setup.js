@@ -46,20 +46,21 @@ async function setup () {
   await replaceInFile('README.md', 'connected-web/vuesite-template', `${org}/${repo}`)
 
   report('Remove and generate package-lock.json')
-  await run(`rm ${fromHere('package-lock.json')}`)
+  await run(`rm ${fromHere('package-lock.json')}`, currentPath)
   await run('npm install', currentPath)
 
-  report('Removing setup script')
-  await run(`rm ${fromHere('first-time-setup.js')}`)
+  report('Generated updated screenshot')
+  await run(`node generate-screenshot.js`, currentPath)
 
-  /*
+  report('Removing setup script')
+  await run(`rm ${fromHere('first-time-setup.js')}`, currentPath)
+
   report('Committing changes and pushing to remote')
   await run('git add .')
-  await run(`git commit -m "Setup template for Current Year (${currentYear})"`)
+  await run(`git commit -m "Setup new vuesite from template for ${org}/${repo})"`)
   await run('git push')
 
   report(`All done - ${org}/${repo} has been setup and is ready to go!`)
-  */
 }
 
 setup()
