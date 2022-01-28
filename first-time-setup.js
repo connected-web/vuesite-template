@@ -43,6 +43,7 @@ async function setup () {
   await replaceInFile('package.json', 'connected-web/vuesite-template', `${org}/${repo}`)
   await replaceInFile('package.json', 'vuesite-template', `${repo}`)
   await replaceInFile('README.md', 'Vuesite Template', 'Your new Vuesite!')
+  await replaceInFile('README.md', 'https://connected-web.github.io/vuesite-template/', `https://${org}.github.io/${repo}/`)
   await replaceInFile('README.md', 'connected-web/vuesite-template', `${org}/${repo}`)
 
   report('Remove and generate package-lock.json')

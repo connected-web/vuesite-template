@@ -16,6 +16,9 @@ A self hosted toolset for building interactive websites on top of Vuepress.
 - Hosted via GitHub pages
 - Deployed automatically via GitHub Actions
 
+If setup correctly (see below); you should be able to access this site on:
+- https://connected-web.github.io/vuesite-template/
+
 ## Development Support
 
 - Hot-reloading provided by Vuepress
