@@ -37,7 +37,7 @@
     "vuepress": "^1.9.7"
   },
   "devDependencies": {
-    "@connected-web/md2json": "^1.1.0",
+    "@connected-web/md2json": "^1.2.0",
     "capture-website-cli": "^2.3.0",
     "chai": "^4.3.6",
     "eslint": "^7.18.0",
