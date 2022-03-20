@@ -13,7 +13,6 @@
 
 <script>
 export default {
-  name: 'Card',
   props: {
     title: {
       type: String,

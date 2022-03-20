@@ -11,28 +11,28 @@ The remote data source component is a clever width that loads data from an remot
 When the component is able to load data, by default, it will render out information about the request, and the response object in a code block.
 
 <ClientOnly>
-  <networking-RemoteDataSource
+  <networking-VuesiteRemoteDataSource
     data-source-url="https://boardgames-api.calisaurus.net/api/status" />
 </ClientOnly>
 
 ```html
 <ClientOnly>
-  <networking-RemoteDataSource
+  <networking-VuesiteRemoteDataSource
     data-source-url="https://boardgames-api.calisaurus.net/api/status" />
 </ClientOnly>
 ```
 
 ### Network Error
 
-By default, the `RemoteDataSource` component will try to load from the url specified by `data-source-url` - if this is an invalid URL, then this will display as a **Network Error**.
+By default, the `VuesiteRemoteDataSource` component will try to load from the url specified by `data-source-url` - if this is an invalid URL, then this will display as a **Network Error**.
 
 <ClientOnly>
-  <networking-RemoteDataSource data-source-url="http://invalid/url" />
+  <networking-VuesiteRemoteDataSource data-source-url="http://invalid/url" />
 </ClientOnly>
 
 ```html
 <ClientOnly>
-  <networking-RemoteDataSource data-source-url="http://invalid/url" />
+  <networking-VuesiteRemoteDataSource data-source-url="http://invalid/url" />
 </ClientOnly>
 ```
 
@@ -41,13 +41,13 @@ By default, the `RemoteDataSource` component will try to load from the url speci
 If you try and load from an valid URL, but the content is not found, then this will display as a **Request failed with status code 404** error.
 
 <ClientOnly>
-  <networking-RemoteDataSource
+  <networking-VuesiteRemoteDataSource
     data-source-url="https://boardgames-api.calisaurus.net/api/404" />
 </ClientOnly>
 
 ```html
 <ClientOnly>
-  <networking-RemoteDataSource
+  <networking-VuesiteRemoteDataSource
     data-source-url="https://boardgames-api.calisaurus.net/api/404" />
 </ClientOnly>
 ```
@@ -60,21 +60,21 @@ In this example, the response data is combined with a `<formattingTabulation />`
 Any custom template can be provided inside the `<template v-slot-"{ response }">...</template>` tag to render the response.
 
 <ClientOnly>
-  <networking-RemoteDataSource
+  <networking-VuesiteRemoteDataSource
     data-source-url="https://boardgames-api.calisaurus.net/api/boardgame/list">
   <template v-slot="{ response }">
-    <formatting-Tabulation v-if="response.data" :items="response.data.games" />
+    <formatting-VuesiteTabulation v-if="response.data" :items="response.data.games" />
   </template>
-  </networking-RemoteDataSource>
+  </networking-VuesiteRemoteDataSource>
 </ClientOnly>
 
 ```html
 <ClientOnly>
-  <networking-RemoteDataSource
+  <networking-VuesiteRemoteDataSource
     data-source-url="https://boardgames-api.calisaurus.net/api/boardgame/list">
   <template v-slot="{ response }">
-    <formatting-Tabulation v-if="response.data" :items="response.data.games" />
+    <formatting-VuesiteTabulation v-if="response.data" :items="response.data.games" />
   </template>
-  </networking-RemoteDataSource>
+  </networking-VuesiteRemoteDataSource>
 </ClientOnly>
 ```

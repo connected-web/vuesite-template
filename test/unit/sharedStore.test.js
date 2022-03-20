@@ -24,4 +24,13 @@ describe('Shared store model', () => {
     const actual = sharedModel.state
     expect(actual).to.deep.equal(expected)
   })
+
+  it('should provide a method to read data from local storage', () => {
+    sharedModel.readFromLocalStorage()
+    const expected = {
+      message: 'New message'
+    }
+    const actual = sharedModel.state
+    expect(actual).to.deep.equal(expected)
+  })
 })

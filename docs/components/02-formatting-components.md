@@ -6,38 +6,38 @@ This page demonstrates formatting components that can be used to present content
 
 Wrap up some content in a box with a title.
 
-<formatting-Card title="Card Title">
+<formatting-VuesiteCard title="Card Title">
   <p><Icon icon="warehouse" /> Card contents</p>
-</formatting-Card>
+</formatting-VuesiteCard>
 
 ```html
-<formatting-Card title="Card Title">
+<formatting-VuesiteCard title="Card Title">
   <p><Icon icon="warehouse" /> Card contents</p>
-</formatting-Card>
+</formatting-VuesiteCard>
 ```
 
 ## Collapsed component
 
 Hide content away in a collapsed component.
 
-<formatting-Collapsed title="Section title">
+<formatting-VuesiteCollapsed title="Section title">
   <p><Icon icon="ambulance" /> Hidden card contents</p>
-</formatting-Collapsed>
+</formatting-VuesiteCollapsed>
 
 ```html
-<formatting-Collapsed title="Hidden section">
+<formatting-VuesiteCollapsed title="Hidden section">
   <p><Icon icon="ambulance" /> Hidden card contents</p>
-</formatting-Collapsed>
+</formatting-VuesiteCollapsed>
 ```
 
 ## Error Formatter
 
 Text formatting and advice for errors that might occur while using interactive components.
 
-<formatting-ErrorFormatter :error="{ message: 'Network Error' }" />
+<formatting-VuesiteErrorFormatter :error="{ message: 'Network Error' }" />
 
 ```html
-<formatting-ErrorFormatter :error="{ message: 'Network Error' }" />
+<formatting-VuesiteErrorFormatter :error="{ message: 'Network Error' }" />
 ```
 
 ## Expiry
@@ -46,52 +46,52 @@ Format a date as a colour coded time relative to the current browser time.
 
 Similar in function to the `Relative Date` component.
 
-<formatting-Expiry :date="new Date('2021-04-01')" />
-<formatting-Expiry :date="new Date('2022-04-01')" />
-<formatting-Expiry :date="new Date('2023-04-01')" />
-<formatting-Expiry :date="new Date('2024-04-01')" />
-<formatting-Expiry :date="new Date('2025-04-01')" />
+<formatting-VuesiteExpiry :date="new Date('2021-04-01')" />
+<formatting-VuesiteExpiry :date="new Date('2022-04-01')" />
+<formatting-VuesiteExpiry :date="new Date('2023-04-01')" />
+<formatting-VuesiteExpiry :date="new Date('2024-04-01')" />
+<formatting-VuesiteExpiry :date="new Date('2025-04-01')" />
 
 ```html
-<formatting-Expiry :date="new Date('2021-04-01')" />
-<formatting-Expiry :date="new Date('2022-04-01')" />
-<formatting-Expiry :date="new Date('2023-04-01')" />
-<formatting-Expiry :date="new Date('2024-04-01')" />
-<formatting-Expiry :date="new Date('2025-04-01')" />
+<formatting-VuesiteExpiry :date="new Date('2021-04-01')" />
+<formatting-VuesiteExpiry :date="new Date('2022-04-01')" />
+<formatting-VuesiteExpiry :date="new Date('2023-04-01')" />
+<formatting-VuesiteExpiry :date="new Date('2024-04-01')" />
+<formatting-VuesiteExpiry :date="new Date('2025-04-01')" />
 ```
 
 ## Messages
 
 Format a list of items as a series of paragraphs.
 
-<formatting-Messages :messages="['Line 1', 'Line 2', 'Line 3']" />
+<formatting-VuesiteMessages :messages="['Line 1', 'Line 2', 'Line 3']" />
 
 ```html
-<formatting-Messages :messages="['Line 1', 'Line 2', 'Line 3']" />
+<formatting-VuesiteMessages :messages="['Line 1', 'Line 2', 'Line 3']" />
 ```
 
 ## Paginated Items
 
 The paginated items formatter reduces the number of items to the page size, calculates the number of pages, and provides a filter to search for a specific item. It can be used to create a filterable, multi-page view of large datasets using a custom renderer.
 
-<formatting-PaginatedItems :pageSize="5" itemTypePlural="things"
+<formatting-VuesitePaginatedItems :pageSize="5" itemTypePlural="things"
     :items="['Apple', 'Orange', 'Banana', 'Grape', 'Pear', 'Mango', 'Tomato', 'Carrot', 'Peas']">
   <template v-slot="{ paginatedItems }">
     <ul>
       <li v-for="item in paginatedItems" :key="item">{{ item }}</li>
     </ul>
   </template>
-</formatting-PaginatedItems>
+</formatting-VuesitePaginatedItems>
 
 ```html
-<formatting-PaginatedItems :pageSize="5" itemTypePlural="things"
+<formatting-VuesitePaginatedItems :pageSize="5" itemTypePlural="things"
     :items="['Apple', 'Orange', 'Banana', 'Grape', 'Pear', 'Mango', 'Tomato', 'Carrot', 'Peas']">
   <template v-slot="{ paginatedItems }">
     <ul>
       <li v-for="item in paginatedItems" :key="item">{{ item }}</li>
     </ul>
   </template>
-</formatting-PaginatedItems>
+</formatting-VuesitePaginatedItems>
 ```
 
 ## Relative Date
@@ -100,32 +100,32 @@ Format a date as a colour coded time relative to the the current browser time.
 
 Similar in function to the `Expiry` component.
 
-<formatting-Card>
-  <formatting-RelativeDate :date="new Date('2021-04-01')" />
-  <formatting-RelativeDate :date="new Date('2022-04-01')" />
-  <formatting-RelativeDate :date="new Date('2023-04-01')" />
-  <formatting-RelativeDate :date="new Date('2024-04-01')" />
-  <formatting-RelativeDate :date="new Date('2025-04-01')" />
-</formatting-Card>
+<formatting-VuesiteCard>
+  <formatting-VuesiteRelativeDate :date="new Date('2021-04-01')" />
+  <formatting-VuesiteRelativeDate :date="new Date('2022-04-01')" />
+  <formatting-VuesiteRelativeDate :date="new Date('2023-04-01')" />
+  <formatting-VuesiteRelativeDate :date="new Date('2024-04-01')" />
+  <formatting-VuesiteRelativeDate :date="new Date('2025-04-01')" />
+</formatting-VuesiteCard>
 
 ```html
-<formatting-Card>
-  <formatting-RelativeDate :date="new Date('2021-04-01')" />
-  <formatting-RelativeDate :date="new Date('2022-04-01')" />
-  <formatting-RelativeDate :date="new Date('2023-04-01')" />
-  <formatting-RelativeDate :date="new Date('2024-04-01')" />
-  <formatting-RelativeDate :date="new Date('2025-04-01')" />
-</formatting-Card>
+<formatting-VuesiteCard>
+  <formatting-VuesiteRelativeDate :date="new Date('2021-04-01')" />
+  <formatting-VuesiteRelativeDate :date="new Date('2022-04-01')" />
+  <formatting-VuesiteRelativeDate :date="new Date('2023-04-01')" />
+  <formatting-VuesiteRelativeDate :date="new Date('2024-04-01')" />
+  <formatting-VuesiteRelativeDate :date="new Date('2025-04-01')" />
+</formatting-VuesiteCard>
 ```
 
 ## Response Formatter
 
 Format a data object as prettified JSON.
 
-<formatting-ResponseFormatter :response="{ some: 'data' }" />
+<formatting-VuesiteResponseFormatter :response="{ some: 'data' }" />
 
 ```html
-<formatting-ResponseFormatter :response="{ some: 'data' }" />
+<formatting-VuesiteResponseFormatter :response="{ some: 'data' }" />
 ```
 
 ## Icon component
@@ -154,14 +154,14 @@ Take a list of of objects and display them as an interactive table.
 
 Can be customised with partial columns, and custom render logic on a per-cell basis.
 
-<formatting-Tabulation :items="[
+<formatting-VuesiteTabulation :items="[
     { name: 'Apple', color: '#D20', icon: 'shopping-bag', qty: 30 },
     { name: 'Banana', color: '#FC0', icon: 'shopping-basket', qty: 12 },
     { name: 'Potato', color: '#', icon: 'shopping-basket', qty: 67 },
     { name: 'Carrot', color: 'orange', icon: 'shopping-bag', qty: 134 }]" />
 
 ```html
-<formatting-Tabulation :items="[
+<formatting-VuesiteTabulation :items="[
     { name: 'Apple', icon: 'shopping-bag', qty: 30 },
     { name: 'Banana', icon: 'shopping-basket', qty: 12 },
     { name: 'Potato', icon: 'shopping-basket', qty: 67 },
@@ -172,10 +172,10 @@ Can be customised with partial columns, and custom render logic on a per-cell ba
 
 Mark up things still to be done in a standard box.
 
-<formatting-Todo>Item 1</formatting-Todo>
-<formatting-Todo>Item 2</formatting-Todo>
+<formatting-VuesiteTodo>Item 1</formatting-VuesiteTodo>
+<formatting-VuesiteTodo>Item 2</formatting-VuesiteTodo>
 
 ```html
-<formatting-Todo>Item 1</formatting-Todo>
-<formatting-Todo>Item 2</formatting-Todo>
+<formatting-VuesiteTodo>Item 1</formatting-VuesiteTodo>
+<formatting-VuesiteTodo>Item 2</formatting-VuesiteTodo>
 ```

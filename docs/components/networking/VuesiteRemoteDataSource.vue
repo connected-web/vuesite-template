@@ -44,8 +44,8 @@
 <script>
 import axios from 'axios'
 
-import ResponseFormatter from '../formatting/ResponseFormatter.vue'
-import ErrorFormatter from '../formatting/ErrorFormatter.vue'
+import ResponseFormatter from '../formatting/VuesiteResponseFormatter.vue'
+import ErrorFormatter from '../formatting/VuesiteErrorFormatter.vue'
 
 const states = {
   INITIALISED: 'initialised',

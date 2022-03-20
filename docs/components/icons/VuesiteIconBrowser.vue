@@ -1,23 +1,23 @@
 <template>
   <div class="icon browser">
-    <formatting-PaginatedItems :items="iconList">          
+    <formatting-VuesitePaginatedItems :items="iconList">          
       <template #default="{ paginatedItems }">
         <div class="row">
           <div class="column">
-            <p v-for="icon in paginatedItems.slice(0, 10)" :key="icon.iconName">
+            <p v-for="[iconKey, icon] in paginatedItems.slice(0, 10)" :key="iconKey" :title="`${iconKey} ${icon.iconName}`">
               <icon :icon="icon.iconName" class="double-size" />
               <b>{{ icon.iconName }}</b>
             </p>
           </div>
           <div class="column">
-            <p v-for="icon in paginatedItems.slice(10, 20)" :key="icon.iconName">
+            <p v-for="[iconKey, icon] in paginatedItems.slice(10, 20)" :key="iconKey" :title="`${iconKey} ${icon.iconName}`">
               <icon :icon="icon.iconName" class="double-size" />
               <b>{{ icon.iconName }}</b>
             </p>
           </div>
         </div>
       </template>
-    </formatting-PaginatedItems>
+    </formatting-VuesitePaginatedItems>
   </div>
 </template>
 
@@ -29,7 +29,7 @@ export default {
   components: { Icon },
   computed: {
     iconList() {
-      return Object.values(fas)
+      return Object.entries(fas)
     }
   }
 }

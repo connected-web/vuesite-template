@@ -25,6 +25,4 @@ const store = {
   }
 }
 
-store.readFromLocalStorage()
-
 module.exports = store
