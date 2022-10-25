@@ -21,7 +21,7 @@
           <slot
             :cell="cell"
             :column="column"
-            :columnKey="columnKey(column)"
+            :column-key="columnKey(column)"
           >
             <div v-if="cellType(cell, column) === 'object'">
               <div v-for="[entryKey, entryValue] in cellEntries(cell, column)" :key="entryKey" class="cell property">
@@ -36,6 +36,14 @@
               <span>{{ contentsOf(cell, column) }}</span>
               <icon icon="square" :style="`color: ${contentsOf(cell, column)}`" />
             </div>
+            <div v-else-if="cellType(cell, column) === 'url'" style="font-family: monospace; white-space: nowrap;">
+              <icon icon="earth-americas" />
+              <a :href="contentsOf(cell, column)">/{{ contentsOf(cell, column).split('/').pop() }}</a>
+            </div>
+            <div v-else-if="cellType(cell, column) === 'date'">
+              <VuesiteRelativeDate v-if="parseDate(contentsOf(cell, column))" :date="parseDate(contentsOf(cell, column))" />
+              <b v-else>{{ contentsOf(cell, column) }}</b>
+            </div>
             <span v-else>
               {{ contentsOf(cell, column) }}
             </span>
@@ -48,12 +56,14 @@
 
 <script>
 import flattenObject from '../utils/flattenObject'
+import VuesiteRelativeDate from './VuesiteRelativeDate.vue'
 
 function removeArrayListeners(data) {
   return JSON.parse(JSON.stringify(data))
 }
 
 export default {
+  components: { VuesiteRelativeDate },
   props: {
     items: {
       type: Array,
@@ -168,6 +178,12 @@ export default {
       if (columnKey === 'color') {
         return 'color'
       }
+      if ((value + '').includes('https://')) {
+        return 'url'
+      }
+      if ((columnKey + '').toLowerCase().includes('date')) {
+        return 'date'
+      }
       return typeof value
     },
     columnHeadingClass(columnHeading) {
@@ -196,6 +212,10 @@ export default {
         columnHeading,
         sortAscending: same ? !this.computedSortAscending : true
       })
+    },
+    parseDate(value) {
+      const date = new Date(value)
+      return (date.toString() === 'Invalid Date') ? false : date
     }
   }
 }
