@@ -10,7 +10,7 @@
           :href="dataSourceUrl"
           title="Open the source URL in a new window"
           target="_blank"
-        >{{ dataSourceUrl }}</a></span>
+        >{{ (localResponse && localResponse.config ? localResponse.config.method : 'PRE') }} /{{ dataSourceUrl.split('/').pop() }}</a></span>
         <span
           title="The status of the network request"
           :class="['statusText', statusText].join(' ')"
@@ -25,7 +25,7 @@
         >{{ responseTime }} ms</span>
       </div>
       <error-formatter
-        v-if="error"
+        v-if="error && showError"
         :error="error"
       />
     </div>
@@ -76,7 +76,21 @@ export default {
       type: Boolean,
       default: false
     },
+    hideResponseOnError: {
+      type: Boolean,
+      default: false
+    },
+    hideError: {
+      type: Boolean,
+      default: false
+    },
     response: {
+      type: Object,
+      default() {
+        return {}
+      }
+    },
+    headers: {
       type: Object,
       default() {
         return {}
@@ -102,7 +116,13 @@ export default {
       return true
     },
     showResponse() {
+      if (this.error && this.hideResponseOnError) {
+        return false
+      }
       return !this.hideResponse
+    },
+    showError() {
+      return !this.hideError
     },
     dataSourceClass() {
       const type = this.statusText
@@ -157,7 +177,10 @@ export default {
       self.startTime = Date.now()
       try {
         self.state = states.REQUEST_SENT
-        localResponse = await axios.get(self.dataSourceUrl, { onDownloadProgress: self.onDownloadProgress })
+        localResponse = await axios.get(self.dataSourceUrl, {
+          headers: self.headers,
+          onDownloadProgress: self.onDownloadProgress
+        })
         self.state = states.RESPONSE_RECEIVED
       } catch (axiosException) {
         self.state = states.REQUEST_EXCEPTION
@@ -336,6 +359,10 @@ pre {
   border-radius: 0.5em;
   background: #eee;
   padding: 0.5em;
+}
+
+.data.source.request.exception {
+  margin-bottom: 0.5em;
 }
 
 </style>
